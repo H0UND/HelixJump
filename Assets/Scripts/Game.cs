@@ -1,12 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
     public Control Control;
+
     public enum State
     {
         Playing,
@@ -19,7 +17,7 @@ public class Game : MonoBehaviour
     public void OnPlayerDied()
     {
         if (CurrentState != State.Playing)
-        {   
+        {
             return;
         }
 

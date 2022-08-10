@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
 {
-    public  Player Player;
+    public Player Player;
     public Transform FinishPlatform;
     public Slider Progress;
     private float _startY;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
@@ -48,7 +46,7 @@ public class LevelGenerator : MonoBehaviour
 
     private float RandomRange(Random random, float min, float maxExclusive)
     {
-        float number = (float) random.NextDouble();
+        float number = (float)random.NextDouble();
         return Mathf.Lerp(min, maxExclusive, number);
     }
 

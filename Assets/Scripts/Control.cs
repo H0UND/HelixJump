@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Control : MonoBehaviour
 {
-    [SerializeField]
-    private float _sensitivity;
-    [SerializeField]
-    private Transform Level;
-    private Vector3 _previousMousePosition;
+    public float _sensitivity;
 
-    void Update()
+    public Transform Level;
+
+    public Vector3 _previousMousePosition;
+
+    private void Update()
     {
         if (Input.GetMouseButton(0))
         {
