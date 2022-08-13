@@ -6,9 +6,16 @@ public class Player : MonoBehaviour
     public Rigidbody Rigidbody;
     public Platform CurrentPlatform;
     public Game Game;
+    private AudioSource audio;
+
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
 
     public void Bounce()
     {
+        audio.Play();
         Rigidbody.velocity = new Vector3(0, BounceSpeed, 0);
     }
 
