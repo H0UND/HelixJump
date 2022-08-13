@@ -8,6 +8,11 @@ public class Sector : MonoBehaviour
     private Rigidbody rb;
     private MeshCollider collider;
     private AudioSource audio;
+    private bool IsDestroyed = false;
+    private float _dissolveValue = 1f;
+    [SerializeField]
+    private Material _dissolveMaterial ;
+    private Renderer _renderer;
 
     private void Awake()
     {
@@ -20,8 +25,8 @@ public class Sector : MonoBehaviour
 
     private void UpdateMaterial()
     {
-        var sectorRenderer = GetComponent<Renderer>();
-        sectorRenderer.sharedMaterial = IsGood ? GoodMaterial : BadMaterial;
+        _renderer = GetComponent<Renderer>();
+        _renderer.material = IsGood ? GoodMaterial : BadMaterial;
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -60,7 +65,27 @@ public class Sector : MonoBehaviour
         collider.enabled = false;
         rb.AddForce(Random.Range(-10f, 10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f), ForceMode.Impulse);
         rb.AddTorque(Random.Range(-10f, 10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f), ForceMode.Impulse);
-        
+        IsDestroyed = true;
+    }
+
+    private void Update()
+    {
+        if (IsDestroyed)
+        {
+            if (_dissolveValue >= 0)
+            {
+                _dissolveValue -= 0.5f * Time.deltaTime;
+                if (IsGood)
+                {
+                    _renderer.material.SetFloat("Vector1_bc88ab5321164720bec72f25548014c2", _dissolveValue);
+                    Debug.Log($"SetFloat {_dissolveValue}");
+                }
+                else
+                {
+                    _renderer.material.SetFloat("Vector1_59d089c58b7e4ffaae71c35202e7e163", _dissolveValue);
+                }
+            }
+        }
     }
 
     private void OnValidate()
