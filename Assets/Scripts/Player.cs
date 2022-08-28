@@ -8,6 +8,12 @@ public class Player : MonoBehaviour
     public Game Game;
     private AudioSource audio;
 
+    [SerializeField]
+    private ParticleSystem _loseParticleSystem;
+
+    [SerializeField]
+    private ParticleSystem _winParticleSystem;
+
     private void Awake()
     {
         audio = GetComponent<AudioSource>();
@@ -24,11 +30,13 @@ public class Player : MonoBehaviour
         Game.OnPlayerReachFinish();
 
         Rigidbody.velocity = Vector3.zero;
+        _winParticleSystem.Play();
     }
 
     public void Die()
     {
         Game.OnPlayerDied();
         Rigidbody.velocity = Vector3.zero;
+        _loseParticleSystem.Play();
     }
 }

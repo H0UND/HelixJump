@@ -3,7 +3,20 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
-    public Control Control;
+    [SerializeField]
+    private Control Control;
+
+    [SerializeField]
+    private GameObject _winPanel;
+
+    [SerializeField]
+    private GameObject _losePanel;
+
+    private void Start()
+    {
+        _winPanel.SetActive(false);
+        _losePanel.SetActive(false);
+    }
 
     public enum State
     {
@@ -24,7 +37,8 @@ public class Game : MonoBehaviour
         CurrentState = State.Loss;
         Control.enabled = false;
         Debug.Log("Game Over!");
-        RealoadLevel();
+        //RealoadLevel();
+        _losePanel.SetActive(true);
     }
 
     internal void OnPlayerReachFinish()
@@ -38,7 +52,8 @@ public class Game : MonoBehaviour
         Control.enabled = false;
         Debug.Log("You won!");
         LevelIndex++;
-        RealoadLevel();
+        //RealoadLevel();
+        _winPanel.SetActive(true);
     }
 
     public int LevelIndex
@@ -53,7 +68,7 @@ public class Game : MonoBehaviour
 
     private const string LEVELINDEX = "LevelIndex";
 
-    private void RealoadLevel()
+    public void RealoadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

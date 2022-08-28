@@ -14,6 +14,9 @@ public class Sector : MonoBehaviour
     private Material _dissolveMaterial ;
     private Renderer _renderer;
 
+    [SerializeField]
+    private ParticleSystem _particleSystem;
+
     private void Awake()
     {
         UpdateMaterial();
@@ -66,6 +69,7 @@ public class Sector : MonoBehaviour
         rb.AddForce(Random.Range(-10f, 10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f), ForceMode.Impulse);
         rb.AddTorque(Random.Range(-10f, 10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f), ForceMode.Impulse);
         IsDestroyed = true;
+        _particleSystem.Play();
     }
 
     private void Update()
